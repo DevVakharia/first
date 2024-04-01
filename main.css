@@ -26,7 +26,7 @@ body {
 }
 
 .menu-icon {
-    display: flex; /* Hide menu icon by default */
+    display: none; /* Hide menu icon by default on desktop */
 }
 
 nav ul {
@@ -36,17 +36,25 @@ nav ul {
     overflow: hidden;
     background-color: #172671;
     display: flex;
+    justify-content: flex-end; /* Align menu items to the right */
+}
+
+nav .menu-items {
+    display: flex; /* Align menu items horizontally */
 }
 
 nav ul li {
-    margin-right: 20px;
+    margin-left: 20px; /* Add margin between menu items */
     transition: transform 0.3s ease; /* Add transition for smooth animation */
+}
+
+nav ul li:first-child {
+    margin-left: 0; /* Remove margin for the first menu item */
 }
 
 nav ul li a {
     color: #fff;
     text-decoration: none;
-    padding-bottom: 10px; /* Add padding bottom to create space for animation */
 }
 
 /* Animation Container styles */
@@ -56,10 +64,12 @@ nav ul li a {
     align-items: center;
     height: 100vh;
     background-color: black; /* Add background color */
+    overflow: hidden; /* Hide overflow to prevent horizontal scrolling */
 }
 
 .single-line {
     white-space: nowrap;
+    margin: 0; /* Remove margin for better fit */
 }
 
 .content {
@@ -68,9 +78,12 @@ nav ul li a {
 
 .content h2 {
     color: #fff;
-    font-size: 8em;
+    font-size: 5em; /* Decrease font size for better fit */
     position: absolute;
+    top: 50%; /* Position at the center vertically */
+    left: 50%; /* Position at the center horizontally */
     transform: translate(-50%, -50%);
+   
 }
 
 .content h2:nth-child(1) {
@@ -92,4 +105,60 @@ nav ul li a {
         clip-path: polygon(0% 60%, 15% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
     }
 }
+/* Media query for mobile devices */
+@media screen and (max-width: 600px) {
+    .menu-items {
+        display: none; /* Hide menu items on small screens */
+        position: absolute; /* Position the menu items absolutely */
+        top: 60px; /* Add space between menu icon and menu items */
+        left:1px; /* Align menu items to the right */
+        background-color: #172671; /* Match background color */
+        padding: 10px; /* Add padding */
+        border-radius: 0 0 5px 5px; /* Add border radius */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add shadow */
+        z-index: 1; /* Ensure menu items are above other content */
+    }
+    .menu-icon {
+        display: block; /* Show menu icon on small screens */
+    }
+    nav ul {
+        flex-direction: column; /* Arrange menu items vertically on small screens */
+        text-align: center; /* Center align menu items on small screens */
+    }
+    nav ul li {
+        margin-left: 0; /* Remove margin for menu items on small screens */
+        margin-bottom: 10px; /* Add bottom margin for menu items on small screens */
+    }
+    nav ul li a {
+        padding: 10px; /* Add padding to menu items */
+        display: block; /* Make menu items block level for better touch responsiveness */
+    }
 
+    /* Animation styles for smaller screens */
+    .content h2 {
+        font-size: 3em; /* Decrease font size for better fit */
+    }
+}
+
+/* Styles for desktop */
+@media screen and (min-width: 601px) {
+    .menu-icon {
+        display: none; /* Hide menu icon on desktop */
+    }
+
+    .menu-items {
+        display: flex; /* Show menu items on desktop */
+    }
+
+    nav ul {
+        justify-content: flex-end; /* Align menu items to the right on desktop */
+    }
+
+    nav ul li {
+        margin-left: 20px; /* Add margin between menu items on desktop */
+    }
+
+    .content h2 {
+        font-size: 8em; /* Increase font size for desktop */
+    }
+}
